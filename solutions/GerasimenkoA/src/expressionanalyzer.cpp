@@ -49,6 +49,13 @@ bool TExpressionAnalyzer::FormulaChecker()
     return st.IsEmpty();
 }
 
+static int Prior(char op) {
+    if (op == '+' || op == '-') return 1;
+    if (op == '*' || op == '/') return 2;
+    if (op == '(') return 0;
+    return -1;
+}
+
 void TExpressionAnalyzer::FormulaConverter()
 {
 
