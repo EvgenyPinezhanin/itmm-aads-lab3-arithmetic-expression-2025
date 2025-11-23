@@ -8,7 +8,7 @@
 #include <tstack.h>
 
 #include <algorithm> 
-#include <cctype>    // isspace
+#include <cctype>
 #include <vector>
 #include <string>
 

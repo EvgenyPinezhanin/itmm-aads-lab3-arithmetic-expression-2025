@@ -23,7 +23,7 @@ protected:
     size_t DataCount;   // количество элементов в СД
     size_t Hi;          // индекс вершины стека
 
-    size_t GetNextIndex(size_t index) // получить следующий индекс (по кольцу или что требуется?)
+    size_t GetNextIndex(size_t index) // получить следующий индекс
     {
         return (index + 1) % MemSize;
     }
@@ -56,14 +56,14 @@ public:
     void Push(const T &Val) // добавить значение
     {
         if (IsFull()) throw out_of_range("Stack overflow.");
-        pMem[Hi++] = Val;
+        pMem[Hi++] = Val; //по кольцу, стэк м.б. закончен
         ++DataCount;
     }
 
     void Pop() // извлечь значение
     {
         if (IsEmpty()) throw out_of_range("Stack underflow.");
-        --Hi;
+        --Hi; 
         --DataCount;
     }
 
