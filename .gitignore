@@ -351,3 +351,5 @@ MigrationBackup/
 
 # VS Code setting dir
 .vscode 
+
+/solutions/*/build/
