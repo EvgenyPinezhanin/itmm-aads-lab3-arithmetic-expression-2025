@@ -24,6 +24,9 @@ public:
   bool FormulaChecker();		// проверка правильности расстановки скобок
   void FormulaConverter();		// перевод в постфиксную форму
   double FormulaCalculator();	// вычисление результата
+
+  std::string GetPostfix() const;
+
 };
 
 #endif

@@ -56,21 +56,23 @@ public:
     void Push(const T &Val) // добавить значение
     {
         if (IsFull()) throw out_of_range("Stack overflow.");
-        pMem[Hi++] = Val; //по кольцу, стэк м.б. закончен
+        pMem[Hi] = Val;
+        Hi = GetNextIndex(Hi);
         ++DataCount;
     }
 
     void Pop() // извлечь значение
     {
         if (IsEmpty()) throw out_of_range("Stack underflow.");
-        --Hi; 
+        Hi = (Hi + MemSize - 1) % MemSize;
         --DataCount;
     }
 
-    T Top() const // получить значение
+    const T& Top() const // получить значение
     {
         if (IsEmpty()) throw out_of_range("Stack is empty.");
-        return pMem[Hi - 1];
+        size_t idx = (Hi + MemSize - 1) % MemSize;
+        return pMem[idx];
     }   
 
     size_t size() const { return DataCount; }
