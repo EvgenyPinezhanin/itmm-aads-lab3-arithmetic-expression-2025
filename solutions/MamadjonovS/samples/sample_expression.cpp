@@ -7,6 +7,8 @@
 #include <iostream>
 #include <string>
 
+#include "tstack.h"
+
 #include "texpressionanalyzer.h"
 
 void main()
