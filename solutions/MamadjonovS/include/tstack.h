@@ -7,7 +7,7 @@
 #ifndef __TStack_H__
 #define __TStack_H__
 
-#include <stdexcept> // Для исключений
+#include <stdexcept>  
 
 const int DefaultMemSize = 1024; // стандартный размер памяти для стека
 
@@ -21,7 +21,7 @@ protected:
 
     int GetNextIndex(int index) // получить следующий индекс
     {
-        return index + 1; // Просто увеличиваем индекс на 1
+        return index + 1;  
     }
 
 public:
@@ -35,36 +35,36 @@ public:
         Hi = -1; // Индекс вершины -1 (стек пуст)
     }
 
-    ~TStack() // Исправлено: было Tstack, должно быть TStack
+    ~TStack() 
     {
-        delete[] pMem; // Освобождаем память
-        pMem = nullptr; // Обнуляем указатель
+        delete[] pMem;  
+        pMem = nullptr;  
     }
 
     bool IsEmpty() const
     {
-        return DataCount == 0; // Стек пуст, если количество элементов 0
+        return DataCount == 0;  
     }
 
     bool IsFull() const
     {
-        return DataCount == MemSize; // Стек полон, если количество элементов равно размеру
+        return DataCount == MemSize;  
     }
 
-    void Put(const T& Val) // добавить значение
+    void Put(const T& Val)  
     {
         if (IsFull()) {
-            throw std::overflow_error("Stack is full"); // Ошибка переполнения
+            throw std::overflow_error("Stack is full"); 
         }
-        Hi++; // Увеличиваем индекс вершины
-        pMem[Hi] = Val; // Записываем значение
+        Hi++; 
+        pMem[Hi] = Val; 
         DataCount++; // Увеличиваем счетчик элементов
     }
 
     T Top() const // получить значение
     {
         if (IsEmpty()) {
-            throw std::underflow_error("Stack is empty"); // Ошибка пустого стека
+            throw std::underflow_error("Stack is empty");  
         }
         return pMem[Hi]; // Возвращаем значение с вершины
     }
@@ -72,12 +72,10 @@ public:
     void Get() // извлечь значение
     {
         if (IsEmpty()) {
-            throw std::underflow_error("Stack is empty"); // Ошибка пустого стека
+            throw std::underflow_error("Stack is empty");  
         }
-        // Для простых типов T дополнительных действий не нужно
-        // Для сложных типов может потребоваться вызов деструктора
-        Hi--; // Уменьшаем индекс вершины
-        DataCount--; // Уменьшаем счетчик элементов
+        Hi--;
+        DataCount--;  
     }
 };
 

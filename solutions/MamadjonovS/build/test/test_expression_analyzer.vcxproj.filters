@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\itmm-aads-lab3-arithmetic-expression-2025\solutions\MamadjonovS\test\test_main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\itmm-aads-lab3-arithmetic-expression-2025\solutions\MamadjonovS\test\test_texpressionanalyzer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\itmm-aads-lab3-arithmetic-expression-2025\solutions\MamadjonovS\test\test_tstack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\itmm-aads-lab3-arithmetic-expression-2025\solutions\MamadjonovS\test\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{7497A5C1-BFB2-36D9-A829-2C6676BE886A}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
