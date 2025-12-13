@@ -111,6 +111,8 @@ string TExpressionAnalyzer::GetPostfix() const
     return string(PostfixForm.begin(), PostfixForm.end());
 }
 
+//добавить остаток от деления. Убрать дабл деление, работаем в интах.
+
 double TExpressionAnalyzer::FormulaCalculator()
 {
     string pf = GetPostfix();
