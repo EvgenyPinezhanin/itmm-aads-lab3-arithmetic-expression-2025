@@ -13,17 +13,17 @@
 
 class TExpressionAnalyzer {
 private:
-  std::string Formula;				// входная строка
-  std::vector<char> PostfixForm;	// постфиксная запись
+  std::string Formula;			// входная строка
+  std::string PostfixForm;		// постфиксная запись
 
   void RemoveSpaces(); // удаление пробелов
 
 public:
   TExpressionAnalyzer(const std::string& _Formula);
 
-  bool FormulaChecker();		// проверка правильности расстановки скобок
-  void FormulaConverter();		// перевод в постфиксную форму
-  double FormulaCalculator();	// вычисление результата
+  bool FormulaChecker();	// проверка правильности расстановки скобок
+  void FormulaConverter();	// перевод в постфиксную форму
+  int FormulaCalculator();	// вычисление результата
 
   std::string GetPostfix() const;
 

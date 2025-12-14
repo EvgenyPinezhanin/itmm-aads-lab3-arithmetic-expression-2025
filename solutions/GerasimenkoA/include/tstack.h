@@ -28,6 +28,10 @@ protected:
         return (index + 1) % MemSize;
     }
 
+    size_t GetPrevIndex(size_t index)
+    {
+        return (index + MemSize - 1) % MemSize;
+    }
 
 public:
     TStack(size_t Size = DefaultMemSize) : pMem(nullptr), MemSize(Size), DataCount(0), Hi(0)
@@ -38,7 +42,10 @@ public:
 
     ~TStack()
     {
-        if (pMem != nullptr) delete[] pMem;
+        if (pMem != nullptr) {
+            delete[] pMem;
+            pMem = nullptr;
+        }
     }
 
 
@@ -64,15 +71,14 @@ public:
     void Pop() // извлечь значение
     {
         if (IsEmpty()) throw out_of_range("Stack underflow.");
-        Hi = (Hi + MemSize - 1) % MemSize;
+        Hi = GetPrevIndex(Hi);
         --DataCount;
     }
 
     const T& Top() const // получить значение
     {
         if (IsEmpty()) throw out_of_range("Stack is empty.");
-        size_t idx = (Hi + MemSize - 1) % MemSize;
-        return pMem[idx];
+        return pMem[Hi - 1];
     }   
 
     size_t size() const { return DataCount; }

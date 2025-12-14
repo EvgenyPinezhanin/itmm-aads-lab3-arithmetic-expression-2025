@@ -7,7 +7,7 @@ TEST(TExpressionAnalyzer, can_work_formulaconverter)
 {
     TExpressionAnalyzer expr("(a + 31) * 5 - 2 * b");
     expr.FormulaConverter();
-    EXPECT_EQ("a31+5*2b*-", expr.GetPostfix());
+    EXPECT_EQ("a 31 + 5 * 2 b * - ", expr.GetPostfix());
 }
 
 TEST(TExpressionAnalyzer, cant_work_formulaconverter_with_empty_string) {
@@ -19,9 +19,9 @@ TEST(TExpressionAnalyzer, can_work_numeric_calculation)
 {
     TExpressionAnalyzer expr("(1 + 3) * 5 - 2 * 4");
     expr.FormulaConverter();                     
-    double result = 0.0;
+    int result = 0;
     ASSERT_NO_THROW(result = expr.FormulaCalculator());
-    EXPECT_EQ(12.0, result);
+    EXPECT_EQ(12, result);
 }
 
 TEST(TExpressionAnalyzer, cant_work_numeric_calculation_when_formula_is_incorrect) {
