@@ -24,6 +24,32 @@ TEST(TExpressionAnalyzer, can_work_numeric_calculation)
     EXPECT_EQ(12, result);
 }
 
+TEST(TExpressionAnalyzer, can_work_numbers_with_multiply_digits_calculation)
+{
+    TExpressionAnalyzer expr("(243 + 31) * 5 - 48 / 12");
+    expr.FormulaConverter();
+    int result = 0;
+    ASSERT_NO_THROW(result = expr.FormulaCalculator());
+    EXPECT_EQ(1366, result);
+}
+
+TEST(TExpressionAnalyzer, can_work_integer_division_calculation)
+{
+    TExpressionAnalyzer expr("38 % 12");
+    expr.FormulaConverter();
+    int result = 0;
+    ASSERT_NO_THROW(result = expr.FormulaCalculator());
+    EXPECT_EQ(2, result);
+}
+
+TEST(TExpressionAnalyzer, cant_work_integer_division_by_zero_calculation)
+{
+    TExpressionAnalyzer expr("38 % 0");
+    expr.FormulaConverter();
+    int result = 0;
+    ASSERT_ANY_THROW(result = expr.FormulaCalculator());
+}
+
 TEST(TExpressionAnalyzer, cant_work_numeric_calculation_when_formula_is_incorrect) {
     TExpressionAnalyzer expr("(1 + )");
     expr.FormulaConverter();
