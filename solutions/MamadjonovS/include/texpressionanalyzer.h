@@ -7,23 +7,24 @@
 #ifndef __TExpressionAnalyzer_H__
 #define __TExpressionAnalyzer_H__
 
-#include <iostream>
 #include <string>
-#include <vector>
 
 class TExpressionAnalyzer {
 private:
-  std::string Formula; // входная строка
-  std::vector<char> PostfixForm; // постфиксная запись
+    std::string Formula;
+    std::string PostfixForm;
 
-  void RemoveSpaces(); // удаление пробелов
+    void RemoveSpaces();
+    void FormulaConverter();
 
 public:
-  TExpressionAnalyzer(const std::string& _Formula);
+    TExpressionAnalyzer(const std::string& _Formula = "");
 
-  bool FormulaChecker(); // проверка правильности расстановки скобок
-  void FormulaConverter(); // перевод в постфиксную форму
-  double FormulaCalculator(); // вычисление результата
+    void SetExpression(const std::string& expr);
+    bool FormulaChecker();
+    double FormulaCalculator();
+    double Calculate();
+    std::string GetPostfix() const;
 };
 
 #endif

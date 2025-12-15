@@ -19,63 +19,57 @@ protected:
     int DataCount; // количество элементов в СД
     int Hi; // индекс вершины стека
 
-    int GetNextIndex(int index) // получить следующий индекс
-    {
-        return index + 1;  
-    }
-
 public:
     TStack(int Size = DefaultMemSize) : MemSize(Size)
     {
         if (Size <= 0) {
-            MemSize = DefaultMemSize; // Используем значение по умолчанию
+            throw std::invalid_argument("Размер стека должен быть положительным.");
         }
         pMem = new T[MemSize]; // Выделяем память
         DataCount = 0; // Стек пуст
         Hi = -1; // Индекс вершины -1 (стек пуст)
     }
 
-    ~TStack() 
-    {
-        delete[] pMem;  
-        pMem = nullptr;  
+    ~TStack() {
+        if (pMem != nullptr) {  // лишняя проверка
+            delete[] pMem;
+            pMem = nullptr;
+        }
     }
-
     bool IsEmpty() const
     {
-        return DataCount == 0;  
+        return DataCount == 0;
     }
 
     bool IsFull() const
     {
-        return DataCount == MemSize;  
+        return DataCount == MemSize;
     }
 
-    void Put(const T& Val)  
+    void Put(const T& Val)
     {
         if (IsFull()) {
-            throw std::overflow_error("Stack is full"); 
+            throw std::overflow_error("Stack is full");
         }
-        Hi++; 
-        pMem[Hi] = Val; 
-        DataCount++; // Увеличиваем счетчик элементов
+        pMem[++Hi] = Val; // Сначала увеличиваем Hi, потом записываем
+        DataCount++;
     }
 
-    T Top() const // получить значение
+    T Top() const
     {
         if (IsEmpty()) {
-            throw std::underflow_error("Stack is empty");  
+            throw std::underflow_error("Stack is empty");
         }
-        return pMem[Hi]; // Возвращаем значение с вершины
+        return pMem[Hi];
     }
 
-    void Get() // извлечь значение
+    void Get()
     {
         if (IsEmpty()) {
-            throw std::underflow_error("Stack is empty");  
+            throw std::underflow_error("Stack is empty");
         }
         Hi--;
-        DataCount--;  
+        DataCount--;
     }
 };
 

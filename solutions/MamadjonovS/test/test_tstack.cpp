@@ -2,6 +2,12 @@
 
 #include <gtest.h>
  
+TEST(TStack, Constructor_ThrowsOnZeroSize) {
+    EXPECT_THROW({
+        TStack<int> s(0);
+        }, std::invalid_argument);
+}
+
 // Создание пустого стека
 TEST(TStack, Constructor_Default) {
     TStack<int> stack;

@@ -1,8 +1,24 @@
 #include "texpressionanalyzer.h"
 
 #include <gtest.h>
+
  
- 
+TEST(TExpressionAnalyzer, double_numbers_addition) {
+    TExpressionAnalyzer a;
+    a.SetExpression("34.55 + 7.12");
+    EXPECT_NEAR(a.Calculate(), 41.67, 0.0001);
+}
+
+TEST(TExpressionAnalyzer, double_numbers_subtraction) {
+    TExpressionAnalyzer a;
+    a.SetExpression("100.5 - 25.25");
+    EXPECT_NEAR(a.Calculate(), 75.25, 0.0001);
+}
+TEST(TExpressionAnalyzer, complex_double_expression) {
+    TExpressionAnalyzer a;
+    a.SetExpression("(12.75 + 3.25) * (8.5 - 2.5) / 4.0");
+    EXPECT_NEAR(a.Calculate(), 24.0, 0.0001);
+}
 //   Создание анализатора с выражением
 TEST(TExpressionAnalyzer, Constructor) {
     TExpressionAnalyzer analyzer("2+2");
