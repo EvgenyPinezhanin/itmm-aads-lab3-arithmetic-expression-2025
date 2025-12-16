@@ -15,7 +15,7 @@ private:
     std::string PostfixForm;
 
     void RemoveSpaces();
-    void FormulaConverter();
+
 
 public:
     TExpressionAnalyzer(const std::string& _Formula = "");
@@ -23,8 +23,10 @@ public:
     void SetExpression(const std::string& expr);
     bool FormulaChecker();
     double FormulaCalculator();
+    void FormulaConverter();
     double Calculate();
     std::string GetPostfix() const;
+ 
 };
 
 #endif
