@@ -68,14 +68,17 @@ void TExpressionAnalyzer::FormulaConverter() {
         char c = Formula[i];
 
         // Если символ - часть числа (цифра или точка)
-        if (std::isdigit(c) || c == '.') {
+        if (std::isdigit(static_cast<unsigned char>(c)) || c == '.') {
             currentNumber += c;
             readingNumber = true;
         }
         else {
             // Если до этого читали число, добавляем его
             if (readingNumber) {
-                PostfixForm += currentNumber + " ";
+                for (char numChar : currentNumber) {
+                    PostfixForm.push_back(numChar);
+                }
+                PostfixForm.push_back(' ');
                 currentNumber.clear();
                 readingNumber = false;
             }
@@ -86,8 +89,8 @@ void TExpressionAnalyzer::FormulaConverter() {
             else if (c == ')') {
                 // Выталкиваем все операторы до открывающей скобки
                 while (!stack.IsEmpty() && stack.Top() != '(') {
-                    PostfixForm += stack.Top();
-                    PostfixForm += " ";
+                    PostfixForm.push_back(stack.Top());
+                    PostfixForm.push_back(' ');
                     stack.Get();
                 }
                 if (!stack.IsEmpty()) {
@@ -97,8 +100,8 @@ void TExpressionAnalyzer::FormulaConverter() {
             else if (IsOperator(c)) {
                 // Выталкиваем операторы с более высоким или равным приоритетом
                 while (!stack.IsEmpty() && GetPriority(stack.Top()) >= GetPriority(c)) {
-                    PostfixForm += stack.Top();
-                    PostfixForm += " ";
+                    PostfixForm.push_back(stack.Top());
+                    PostfixForm.push_back(' ');
                     stack.Get();
                 }
                 stack.Put(c);
@@ -108,13 +111,16 @@ void TExpressionAnalyzer::FormulaConverter() {
 
     // Добавляем оставшееся число, если есть
     if (!currentNumber.empty()) {
-        PostfixForm += currentNumber + " ";
+        for (char numChar : currentNumber) {
+            PostfixForm.push_back(numChar);
+        }
+        PostfixForm.push_back(' ');
     }
 
     // Выталкиваем все оставшиеся операторы из стека
     while (!stack.IsEmpty()) {
-        PostfixForm += stack.Top();
-        PostfixForm += " ";
+        PostfixForm.push_back(stack.Top());
+        PostfixForm.push_back(' ');
         stack.Get();
     }
 
@@ -130,52 +136,61 @@ double TExpressionAnalyzer::FormulaCalculator() {
     }
 
     TStack<double> stack;
-    std::istringstream iss(PostfixForm);
     std::string token;
 
-    while (iss >> token) {
-        // Проверяем, является ли токен оператором
-        if (token == "+" || token == "-" || token == "*" || token == "/") {
-            // Проверяем, достаточно ли операндов в стеке
-            if (stack.IsEmpty()) {
-                throw std::runtime_error("Not enough operands");
-            }
-            double b = stack.Top();
-            stack.Get();
+    for (size_t i = 0; i < PostfixForm.size(); ++i) {
+        char c = PostfixForm[i];
 
-            if (stack.IsEmpty()) {
-                throw std::runtime_error("Not enough operands");
-            }
-            double a = stack.Top();
-            stack.Get();
-
-            double result;
-            if (token == "+") {
-                result = a + b;
-            }
-            else if (token == "-") {
-                result = a - b;
-            }
-            else if (token == "*") {
-                result = a * b;
-            }
-            else if (token == "/") {
-                if (b == 0.0) {
-                    throw std::runtime_error("Division by zero");
-                }
-                result = a / b;
-            }
-            stack.Put(result);
+        if (c != ' ') {
+            token += c;
         }
-        else {
-            // Это число
-            try {
-                double num = std::stod(token);
-                stack.Put(num);
+        if (c == ' ' || i == PostfixForm.size() - 1) {
+            if (token.empty()) continue;
+
+            // Проверяем, является ли токен оператором
+            if (token == "+" || token == "-" || token == "*" || token == "/") {
+                // Проверяем, достаточно ли операндов в стеке
+                if (stack.IsEmpty()) {
+                    throw std::runtime_error("Not enough operands");
+                }
+                double b = stack.Top();
+                stack.Get();
+
+                if (stack.IsEmpty()) {
+                    throw std::runtime_error("Not enough operands");
+                }
+                double a = stack.Top();
+                stack.Get();
+
+                double result;
+                if (token == "+") {
+                    result = a + b;
+                }
+                else if (token == "-") {
+                    result = a - b;
+                }
+                else if (token == "*") {
+                    result = a * b;
+                }
+                else if (token == "/") {
+                    if (b == 0.0) {
+                        throw std::runtime_error("Division by zero");
+                    }
+                    result = a / b;
+                }
+                stack.Put(result);
             }
-            catch (const std::exception& e) {
-                throw std::runtime_error("Invalid number in expression");
+            else {
+                // Это число
+                try {
+                    double num = std::stod(token);
+                    stack.Put(num);
+                }
+                catch (const std::exception& e) {
+                    throw std::runtime_error("Invalid number in expression");
+                }
             }
+            token.clear();
         }
     }
 
@@ -193,16 +208,4 @@ double TExpressionAnalyzer::FormulaCalculator() {
     return result;
 }
 
-void TExpressionAnalyzer::SetExpression(const std::string& expr) {
-    Formula = expr;
-    RemoveSpaces();
-    PostfixForm.clear();
-}
-
-double TExpressionAnalyzer::Calculate() {
-    return FormulaCalculator();
-}
-
-std::string TExpressionAnalyzer::GetPostfix() const {
-    return PostfixForm;
-}
+ 

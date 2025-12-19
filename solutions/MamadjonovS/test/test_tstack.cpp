@@ -2,11 +2,19 @@
 
 #include <gtest.h>
  
+TEST(TStack, Constructor_ThrowsOnNegativeSize) {
+    EXPECT_THROW({
+        TStack<int> s(-5);
+        }, std::invalid_argument);
+}
+
+// Создание стека с нулевым размером
 TEST(TStack, Constructor_ThrowsOnZeroSize) {
     EXPECT_THROW({
         TStack<int> s(0);
         }, std::invalid_argument);
 }
+
 
 // Создание пустого стека
 TEST(TStack, Constructor_Default) {
@@ -19,11 +27,12 @@ TEST(TStack, Constructor_Default) {
 TEST(TStack, Constructor_WithSize) {
     TStack<int> stack(5);
     EXPECT_TRUE(stack.IsEmpty());
+    EXPECT_FALSE(stack.IsFull());
 }
 
 //   Добавление одного элемента
 TEST(TStack, Put_OneElement) {
-    TStack<int> stack;
+    TStack<int> stack(10);
     stack.Put(42);
     EXPECT_FALSE(stack.IsEmpty());
     EXPECT_EQ(stack.Top(), 42);
@@ -41,7 +50,7 @@ TEST(TStack, Put_MultipleElements) {
 
 //   Извлечение одного элемента
 TEST(TStack, Get_OneElement) {
-    TStack<int> stack;
+    TStack<int> stack(5);
     stack.Put(100);
     int top = stack.Top();
     stack.Get();
@@ -84,13 +93,13 @@ TEST(TStack, Put_Overflow) {
 
 //   Извлечение из пустого стека
 TEST(TStack, Get_EmptyStack) {
-    TStack<int> stack;
+    TStack<int> stack(5);
     EXPECT_THROW(stack.Get(), std::underflow_error);
 }
 
 //   Получение вершины пустого стека
 TEST(TStack, Top_EmptyStack) {
-    TStack<int> stack;
+    TStack<int> stack(5);
     EXPECT_THROW(stack.Top(), std::underflow_error);
 }
 
