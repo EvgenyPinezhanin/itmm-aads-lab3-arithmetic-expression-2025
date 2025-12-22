@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ALL_BUILD", "ALL_BUILD.vcxproj", "{D7D9D251-905B-34EA-B48D-5D0AF6C4ADCC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2AD099AE-F5B4-3DC8-9D94-1AD15E6D62A3} = {2AD099AE-F5B4-3DC8-9D94-1AD15E6D62A3}
+		{D1F5F741-B803-3DB1-8F1B-DAE135DA6546} = {D1F5F741-B803-3DB1-8F1B-DAE135DA6546}
+		{49FA4AD8-2020-3403-A639-E6396943B4E5} = {49FA4AD8-2020-3403-A639-E6396943B4E5}
+		{B4AA6367-36BF-3E76-9FA6-B96CEAAD337B} = {B4AA6367-36BF-3E76-9FA6-B96CEAAD337B}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZERO_CHECK", "ZERO_CHECK.vcxproj", "{2AD099AE-F5B4-3DC8-9D94-1AD15E6D62A3}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "expression_analyzer", "src\expression_analyzer.vcxproj", "{D1F5F741-B803-3DB1-8F1B-DAE135DA6546}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2AD099AE-F5B4-3DC8-9D94-1AD15E6D62A3} = {2AD099AE-F5B4-3DC8-9D94-1AD15E6D62A3}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gtest", "gtest\gtest.vcxproj", "{49FA4AD8-2020-3403-A639-E6396943B4E5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2AD099AE-F5B4-3DC8-9D94-1AD15E6D62A3} = {2AD099AE-F5B4-3DC8-9D94-1AD15E6D62A3}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_expression_analyzer", "test\test_expression_analyzer.vcxproj", "{B4AA6367-36BF-3E76-9FA6-B96CEAAD337B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2AD099AE-F5B4-3DC8-9D94-1AD15E6D62A3} = {2AD099AE-F5B4-3DC8-9D94-1AD15E6D62A3}
+		{D1F5F741-B803-3DB1-8F1B-DAE135DA6546} = {D1F5F741-B803-3DB1-8F1B-DAE135DA6546}
+		{49FA4AD8-2020-3403-A639-E6396943B4E5} = {49FA4AD8-2020-3403-A639-E6396943B4E5}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D7D9D251-905B-34EA-B48D-5D0AF6C4ADCC}.Debug|x64.ActiveCfg = Debug|x64
+		{D7D9D251-905B-34EA-B48D-5D0AF6C4ADCC}.Release|x64.ActiveCfg = Release|x64
+		{2AD099AE-F5B4-3DC8-9D94-1AD15E6D62A3}.Debug|x64.ActiveCfg = Debug|x64
+		{2AD099AE-F5B4-3DC8-9D94-1AD15E6D62A3}.Debug|x64.Build.0 = Debug|x64
+		{2AD099AE-F5B4-3DC8-9D94-1AD15E6D62A3}.Release|x64.ActiveCfg = Release|x64
+		{2AD099AE-F5B4-3DC8-9D94-1AD15E6D62A3}.Release|x64.Build.0 = Release|x64
+		{D1F5F741-B803-3DB1-8F1B-DAE135DA6546}.Debug|x64.ActiveCfg = Debug|x64
+		{D1F5F741-B803-3DB1-8F1B-DAE135DA6546}.Debug|x64.Build.0 = Debug|x64
+		{D1F5F741-B803-3DB1-8F1B-DAE135DA6546}.Release|x64.ActiveCfg = Release|x64
+		{D1F5F741-B803-3DB1-8F1B-DAE135DA6546}.Release|x64.Build.0 = Release|x64
+		{49FA4AD8-2020-3403-A639-E6396943B4E5}.Debug|x64.ActiveCfg = Debug|x64
+		{49FA4AD8-2020-3403-A639-E6396943B4E5}.Debug|x64.Build.0 = Debug|x64
+		{49FA4AD8-2020-3403-A639-E6396943B4E5}.Release|x64.ActiveCfg = Release|x64
+		{49FA4AD8-2020-3403-A639-E6396943B4E5}.Release|x64.Build.0 = Release|x64
+		{B4AA6367-36BF-3E76-9FA6-B96CEAAD337B}.Debug|x64.ActiveCfg = Debug|x64
+		{B4AA6367-36BF-3E76-9FA6-B96CEAAD337B}.Debug|x64.Build.0 = Debug|x64
+		{B4AA6367-36BF-3E76-9FA6-B96CEAAD337B}.Release|x64.ActiveCfg = Release|x64
+		{B4AA6367-36BF-3E76-9FA6-B96CEAAD337B}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1CD31C61-7899-3774-8A60-279CD165E998}
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
