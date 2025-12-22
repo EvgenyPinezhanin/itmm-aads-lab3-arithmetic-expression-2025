@@ -1,33 +1,33 @@
-﻿// ННГУ, ИИТММ, Курс "Алгоритмы и структуры данных"
-//
-// Тестирование вычисления выражений
-//
-// Copyright (c) Пинежанин Е.С.
+﻿
+        case LEFT_PAREN:
+            std::cout << "LEFT_PAREN";
+            break;
+        case RIGHT_PAREN:
+            std::cout << "RIGHT_PAREN";
+            break;
+        case UNARY_MINUS:
+            std::cout << "UNARY_MIN";
+            break;
+        default:
+            std::cout << "UNKNOWN";
+            break;
+        }
+        std::cout << std::endl;
+    } // for token in tokens
+    try {
+        // Устанавливаем переменные в PostfixConverter
+        converter.setVariables();
 
-#include <iostream>
-#include <string>
+        // Печатаем результат
+        std::cout << "Postfix notation: ";
+        converter.printPostfix(std::cout);
 
-#include "texpressionanalyzer.h"
-
-void main()
-{
-  std::string formula = "(4 * 5 + 7) + (20 - 3 * 8)";
-  int correct_res = 29;
-
-  TExpressionAnalyzer analyzer(formula);
-
-  if (!analyzer.FormulaChecker()) {
-    std::cout << "Error: formula isn't correct\n";
-    return;
-  }
-
-  analyzer.FormulaConverter();
-
-  int res = analyzer.FormulaCalculator();
-
-  if (res == correct_res) {
-    std::cout << "Answer: " << res << "\n";
-  } else {
-    std::cout << "Error: answer isn't correct\n";
-  }
-}
+        // Вычисляем результат
+        double result = converter.evaluate();
+        std::cout << "Result: " << result << std::endl;
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+        return 1;
+    }
+};
